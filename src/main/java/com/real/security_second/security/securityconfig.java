@@ -3,6 +3,8 @@ package com.real.security_second.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +23,18 @@ public class securityconfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) {
         return http
 
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(headerConfigurer -> headerConfigurer
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                )
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/register").permitAll()
+
+                        .anyRequest().fullyAuthenticated()
+                )
 
                 .build();
     }
