@@ -23,6 +23,8 @@ public class User {
     @GeneratedValue
     private UUID id;
     private String username;
+    private String firstname;
+    private String lastname;
     private String password;
     private String role;
 }

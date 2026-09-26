@@ -2,15 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Regiter-page</title>
     <link rel="stylesheet" href="/login-page.css"/>
 </head>
 <body class="container">
-<h1>Login Page</h1>
+<h1>User Registration Page</h1>
 
 <p class="warning" th:if="${error}" th:text="${error}"></p>
+<p class="success" th:if="${success}" th:text="${success}"></p>
 
-<form th:action="@{/login}" method="POST">
+<form th:action="@{/register}" method="POST">
+    <label for="firstName">First name</label>
+    <input type="text" name="firstName" id="firstName" required>
+    <label for="lastName">Last name</label>
+    <input type="text" name="lastName" id="lastName" required>
     <label for="username">Username</label>
     <input type="text" name="username" id="username" required>
     <label for="password">Password</label>
@@ -18,6 +23,6 @@
     <button type="submit">Submit</button>
 </form>
 
-<a th:href="@{/register}">Click Here to Signup</a>
+<a th:href="@{/login}">Click Here to Login</a>
 </body>
 </html>

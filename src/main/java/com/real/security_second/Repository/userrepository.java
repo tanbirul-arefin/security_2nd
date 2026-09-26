@@ -1,6 +1,7 @@
 package com.real.security_second.Repository;
 
-import org.apache.catalina.User;
+
+import com.real.security_second.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
