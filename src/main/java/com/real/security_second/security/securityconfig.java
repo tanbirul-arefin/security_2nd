@@ -14,6 +14,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @Configuration
 public class securityconfig {
 
+    private final CustomUserDetailsService CustomUserDetailsService
+
     @Bean
    PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
@@ -41,8 +43,9 @@ public class securityconfig {
                         .failureUrl("/login?error=true")
                         .defaultSuccessUrl("/dashboard",true)
 
-
+                        .
                 )
+                .userDetailsService(CustomUserDetailsService)
                 .build();
     }
 }
