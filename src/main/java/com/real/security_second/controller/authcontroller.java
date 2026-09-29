@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
+//import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
 
 @Controller
 public class authcontroller {
@@ -22,7 +22,7 @@ public class authcontroller {
     }
 
     @GetMapping({"/","/login"})
-    public String login(Model model , @RequestParam @Nullable String error , RedirectAttributes redirectAttributes) {
+    public String login(@RequestParam @Nullable String error , RedirectAttributes redirectAttributes) {
 
         if (error != null && (error.equals("true"))) {
             redirectAttributes.addFlashAttribute("error", "Invalid username or password");
@@ -31,13 +31,9 @@ public class authcontroller {
         return "login-page";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard( Model model){
-        return "dashboard";
-    }
 
     @GetMapping({"/","/register"})
-    public String register(Model model) {
+    public String register() {
         return "register-page";
     }
 
@@ -56,4 +52,10 @@ public class authcontroller {
         }
         return "redirect:/register";
     }
+
+    @GetMapping("/dashboard")
+    public String dashboard( Model model){
+        return "dashboard";
+    }
+
 }

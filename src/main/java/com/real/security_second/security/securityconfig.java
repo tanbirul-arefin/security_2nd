@@ -1,5 +1,6 @@
 package com.real.security_second.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,10 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+
+@RequiredArgsConstructor
 @Configuration
 public class securityconfig {
 
-    private final CustomUserDetailsService CustomUserDetailsService
+    private final CustomUserDetailsService customUserDetailsService;
+
+
 
     @Bean
    PasswordEncoder passwordEncoder() {
@@ -43,9 +48,9 @@ public class securityconfig {
                         .failureUrl("/login?error=true")
                         .defaultSuccessUrl("/dashboard",true)
 
-                        .
+
                 )
-                .userDetailsService(CustomUserDetailsService)
+                .userDetailsService(customUserDetailsService)
                 .build();
     }
 }
