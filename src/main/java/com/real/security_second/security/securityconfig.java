@@ -36,6 +36,13 @@ public class securityconfig {
                         .anyRequest().fullyAuthenticated()
                 )
 
+                .formLogin( formLoginConfigurer -> formLoginConfigurer
+                        .loginPage("/login")
+                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/dashboard",true)
+
+
+                )
                 .build();
     }
 }

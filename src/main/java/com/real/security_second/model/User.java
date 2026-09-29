@@ -16,7 +16,7 @@ import java.util.UUID;
 @Data
 @ToString
 @Entity
-@Table(name="user-table")
+@Table(name="user_database")
 public class User {
 
     @Id
