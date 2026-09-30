@@ -39,7 +39,8 @@ public class securityconfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/register").permitAll()
-
+                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
                         .anyRequest().fullyAuthenticated()
                 )
 

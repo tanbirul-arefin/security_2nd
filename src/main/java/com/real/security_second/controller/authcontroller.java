@@ -3,12 +3,17 @@ package com.real.security_second.controller;
 import com.real.security_second.service.userservice;
 import jakarta.annotation.Nullable;
 import org.hibernate.engine.internal.Nullability;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 //import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
 
@@ -54,8 +59,25 @@ public class authcontroller {
     }
 
     @GetMapping("/dashboard")
-    public String dashboard( Model model){
-        return "dashboard";
+    public String dashboardPage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
+
+        if (authorities.get(0).getAuthority().equals("ADMIN")) {
+            return "redirect:/admin/dashboard";
+        } else {
+            return "redirect:/user/dashboard";
+        }
+    }
+
+    @GetMapping("/admin/dashboard")
+    public String adminDashboardPage() {
+        return "admin-dashboard";
+    }
+
+    @GetMapping("/user/dashboard")
+    public String usreDashboardPage() {
+        return "user-dashboard";
     }
 
 }
